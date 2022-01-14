@@ -47,7 +47,6 @@ module "vm1" {
 module "vm2" {
   source = "./modules/windows-vm"
 
-  install_iis         = false
   location            = azurerm_resource_group.rg.location
   name                = "vm-product-002"
   resource_group_name = azurerm_resource_group.rg.name

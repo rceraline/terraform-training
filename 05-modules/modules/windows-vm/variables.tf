@@ -1,6 +1,7 @@
 variable "install_iis" {
   type        = bool
   description = "Determine if IIS should be install on the VM."
+  default     = false
 }
 
 variable "location" {
