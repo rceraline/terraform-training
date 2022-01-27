@@ -162,7 +162,7 @@ resource "azurerm_firewall_network_rule_collection" "allow_all" {
 }
 
 ### route tables ###
-resource "azurerm_route_table" "route1" {
+resource "azurerm_route_table" "to_spoke2" {
   name                = "rt-terraform-001"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -175,7 +175,7 @@ resource "azurerm_route_table" "route1" {
   }
 }
 
-resource "azurerm_route_table" "route2" {
+resource "azurerm_route_table" "to_spoke1" {
   name                = "rt-terraform-002"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -190,12 +190,12 @@ resource "azurerm_route_table" "route2" {
 
 resource "azurerm_subnet_route_table_association" "spoke1" {
   subnet_id      = azurerm_subnet.spoke1_subnet1.id
-  route_table_id = azurerm_route_table.route1.id
+  route_table_id = azurerm_route_table.to_spoke2.id
 }
 
 resource "azurerm_subnet_route_table_association" "spoke2" {
   subnet_id      = azurerm_subnet.spoke2_subnet1.id
-  route_table_id = azurerm_route_table.route2.id
+  route_table_id = azurerm_route_table.to_spoke1.id
 }
 
 ### Bastion ###
